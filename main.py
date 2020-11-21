@@ -26,6 +26,11 @@ def save_new_passwords(pass_dict):
         f.write(json.dumps(pass_dict))
         f.close()
 
+def get_password(pass_dict):
+    print("enter a site name")
+    site_name = str(input())
+    # add auth here with master password
+    return pass_dict[site_name])
 
 
 wordlist = ["apple", "qwerty", "asdf"]
@@ -41,6 +46,7 @@ if choice == options[0]:
     save_new_passwords(pass_dict)
 elif choice == options[1]:
     print("getting your password")
+    get_password(pass_dict)
 
 
 
