@@ -1,6 +1,7 @@
 import config
 import hashlib
 import random
+<<<<<<< HEAD
 import enquiries
 import json
 
@@ -16,11 +17,18 @@ def add_password(pass_dict):
     #pass_dict[len(pass_dict)+1] = hashed_pass
     pass_dict[new_site] = hashed_pass
     return pass_dict
+=======
+
+string = str(input())
+wordlist = ["apple", "qwerty", "asdf"]
+print(string)
+>>>>>>> 38be06c5707d792a457d2599050b54c56ea33b1e
 
 def hash_password(password):
     password += random.choice(wordlist)
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+<<<<<<< HEAD
 def save_new_passwords(pass_dict):
     with open("passwords.txt", 'w', encoding = 'utf-8') as f:
         f.write(json.dumps(pass_dict))
@@ -52,3 +60,8 @@ elif choice == options[1]:
 
 
 print(pass_dict.items())
+=======
+hashed_string = hash_password(string)
+
+print(hashed_string)
+>>>>>>> 38be06c5707d792a457d2599050b54c56ea33b1e
