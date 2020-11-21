@@ -1,0 +1,1 @@
+ACTION=="add", SUBSYSTEM=="usb", ENV{PRODUCT}=="1307/163/100", RUN+="/home/vayermaking/test.sh"
