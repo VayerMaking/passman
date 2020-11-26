@@ -36,11 +36,12 @@ def load_machine_id():
     return machine_id_loaded
 
 def auth():
-    if get_macine_id() == load_machine_id():
+    if get_machine_id() == load_machine_id():
         return True
 
 def hash_password(password):
-    password += random.choice(wordlist)
+    #password += random.choice(wordlist)
+    password += get_master_password()
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
 def set_machine_id():
@@ -73,3 +74,9 @@ def create_master_password():
             f.close()
     else:
         print("you have already set a master password")
+
+def get_master_password():
+    with open('.master_pass', 'r') as f:
+        master_pass = f.read().replace('\n', '')
+        f.close()
+    return master_pass
