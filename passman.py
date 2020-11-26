@@ -3,6 +3,7 @@ import random
 import enquiries
 import json
 import subprocess
+import os
 
 
 def load_passwords():
@@ -62,3 +63,13 @@ def get_password(pass_dict):
             print("There is no {} site in your passman!".format(site_name))
     else:
         print("unsuccessful auth")
+
+def create_master_password():
+    if os.stat('.master_pass').st_size==0:
+        print("avaiable")
+        master_pass = str(input())
+        with open('.master_pass', 'w') as f:
+            f.write(master_pass)
+            f.close()
+    else:
+        print("you have already set a master password")
