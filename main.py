@@ -24,3 +24,4 @@ elif choice == options[2]:
     passman.set_machine_id()
 elif choice == options[3]:
     print("creating master password")
+    passman.create_master_password()
