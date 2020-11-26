@@ -6,12 +6,9 @@ import json
 import subprocess
 
 
-with open('passwords.txt') as j:
-    pass_dict = json.load(j)
-
-with open('.machine_id', 'w') as f:
-    process = subprocess.Popen(['cat', '/var/lib/dbus/machine-id'], stdout=f)
-
+def load_passwords():
+    with open('passwords.txt') as j:
+        pass_dict = json.load(j)
 
 def add_password(pass_dict):
     print("enter a site name")
@@ -45,6 +42,10 @@ def hash_password(password):
     password += random.choice(wordlist)
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+def set_machine_id():
+    with open('.machine_id', 'w') as f:
+        process = subprocess.Popen(['cat', '/var/lib/dbus/machine-id'], stdout=f)
+
 def save_new_passwords(pass_dict):
     with open("passwords.txt", 'w', encoding = 'utf-8') as f:
         f.write(json.dumps(pass_dict))
@@ -67,21 +68,22 @@ def get_password(pass_dict):
 #wordlist = ["apple", "qwerty", "asdf"]
 #print(string)
 
-print(get_macine_id())
-print(load_machine_id())
-options = ['add a new password', 'get a password', 'set the machine_id(requires password)']
+load_passwords()
+
+options = [ 'get a password', 'add a new password', 'set the machine_id(requires password)']
 choice = enquiries.choose('Choose one of these options: ', options)
 print("you chose:", choice)
 
 if choice == options[0]:
+    print("getting your password")
+    print(get_password(pass_dict))
+elif choice == options[1]:
     print("adding a new password")
     add_password(pass_dict)
     save_new_passwords(pass_dict)
-elif choice == options[1]:
-    print("getting your password")
-    print(get_password(pass_dict))
 elif choice == options[2]:
     print("setting machine_id")
+    set_machine_id()
 
 
 
