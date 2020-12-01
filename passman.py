@@ -20,7 +20,7 @@ def encrypt_password(password, key):
     return (kdfSalt, ciphertext, aesCipher.nonce, authTag)
 
 def decrypt_password(encrypted_password, key):
-    kdfSalt, ciphertext, nonce, authTag = encrypted_password
+    kdfSalt, ciphertext, nonce, authTag = encrypted_password.decode('utf8')
     secretKey = scrypt.hash(key, kdfSalt, N=16384, r=8, p=1, buflen=32)
     aesCipher = AES.new(secretKey, AES.MODE_GCM, nonce)
     plaintext = aesCipher.decrypt_and_verify(ciphertext, authTag)

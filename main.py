@@ -3,10 +3,17 @@ import hashlib
 import random
 import enquiries
 import json
+import os
 import subprocess
+from simplecrypt import encrypt, decrypt
 import passman
 
-pass_dict = passman.load_passwords()
+if passman.load_passwords() != None:
+    pass_dict = passman.load_passwords()
+else:
+    pass_dict = {}
+
+
 
 options = [ 'get a password', 'add a new password', 'set the machine_id(requires password)', 'create master password']
 choice = enquiries.choose('Choose one of these options: ', options)
