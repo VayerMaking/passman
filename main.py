@@ -5,7 +5,6 @@ import enquiries
 import json
 import os
 import subprocess
-from simplecrypt import encrypt, decrypt
 import passman
 
 if passman.load_passwords() != None:
@@ -15,20 +14,24 @@ else:
 
 
 
-options = [ 'get a password', 'add a new password', 'set the machine_id(requires password)', 'create master password']
+options = [ 'get a password', 'add a new password', 'set the machine_id(requires password)', 'create master password', 'get a password with menu']
 choice = enquiries.choose('Choose one of these options: ', options)
 print("you chose:", choice)
 
 if choice == options[0]:
-    print("getting your password")
-    print(passman.get_password(pass_dict))
+    print("getting your password...")
+    print("your password is: ", passman.get_password(pass_dict))
 elif choice == options[1]:
-    print("adding a new password")
+    print("adding a new password...")
     passman.add_password(pass_dict)
     passman.save_new_passwords(pass_dict)
 elif choice == options[2]:
-    print("setting machine_id")
+    print("setting machine_id...")
     passman.set_machine_id()
 elif choice == options[3]:
-    print("creating master password")
+    print("creating master password...")
     passman.create_master_password()
+    passman.generate_key()
+elif choice == options[4]:
+    print("getting password...")
+    print("your password is: ", passman.get_password_menu(pass_dict))
