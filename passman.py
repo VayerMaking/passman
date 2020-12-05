@@ -133,7 +133,27 @@ def get_password(pass_dict):
             print("There is no {} site in your passman!".format(site_name))
     else:
         print("unsuccessful auth")
+def get_password_menu(pass_dict):
+    print("enter a site name")
 
+    options = pass_dict.keys()
+    choice = enquiries.choose('Choose one of these options: ', options)
+    print("you chose:", choice)
+    #site_name = str(input())
+    # add auth here with master password
+    if auth() == True:
+        try:
+            master_pass = get_master_password().encode('utf-8')
+
+            #print("get", get)
+            #print("master_pass", master_pass)
+            #print("whole", pass_dict[site_name])
+            password = decrypt_password(pass_dict[choice].encode('utf-8'))
+            return password.decode('utf-8')
+        except KeyError:
+            print("There is no {} site in your passman!".format(site_name))
+    else:
+        print("unsuccessful auth")
 
 def create_master_password():
     if os.stat('.master_pass').st_size==0:
