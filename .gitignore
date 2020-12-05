@@ -4,3 +4,4 @@ config.py
 passwords.txt
 .machine_id
 .master_pass
+secret.key
