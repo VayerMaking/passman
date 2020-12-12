@@ -35,7 +35,7 @@ while True:
         settings_choice = enquiries.choose('Choose one of these options: ', settings_options)
         if settings_choice == settings_options[0]:
             print("setting machine_id...")
-            passman.set_machine_id()
+            #passman.set_machine_id()
         elif settings_choice == settings_options[1]:
             print("creating master password...")
             passman.create_master_password()

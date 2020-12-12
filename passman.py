@@ -40,7 +40,7 @@ def load_passwords():
 def add_password(pass_dict):
     print("enter a site name")
     new_site = str(input())
-    print("ender the password")
+    print("enter the password")
     new_pass = str(input())
     master_pass = get_master_password().encode('utf-8')
     hashed_pass = encrypt_password(new_pass)
@@ -49,9 +49,10 @@ def add_password(pass_dict):
 
 
 def auth():
-    return True
-    #if get_machine_id() == load_machine_id():
-    #    return True
+    print("enter master password...")
+    input_pass = str(input())
+    if get_master_password() == input_pass:
+        return True
 
 def save_new_passwords(pass_dict):
     with open("passwords.txt", 'w', encoding = 'utf-8') as f:
@@ -70,6 +71,7 @@ def get_password(pass_dict):
             print("There is no {} site in your passman!".format(site_name))
     else:
         print("unsuccessful auth")
+        
 def get_password_menu(pass_dict):
     print("enter a site name")
 
