@@ -47,30 +47,11 @@ def add_password(pass_dict):
     pass_dict.update({new_site : hashed_pass.decode('utf-8')})
     return pass_dict
 
-def get_machine_id():
-    process = subprocess.check_output(['cat', '/var/lib/dbus/machine-id'])
-    result = str(process)
-    result = result[:-3]
-    result = result.replace("b'", '')
-    return result
-
-def load_machine_id():
-    with open('.machine_id', 'r') as m:
-        machine_id_loaded = m.read().replace('\n', '')
-    m.close()
-    return machine_id_loaded
 
 def auth():
-    if get_machine_id() == load_machine_id():
-        return True
-
-def hash_password(password):
-    password += get_master_password()
-    return hashlib.sha256(password.encode('utf-8')).hexdigest()
-
-def set_machine_id():
-    with open('.machine_id', 'w') as f:
-        process = subprocess.Popen(['cat', '/var/lib/dbus/machine-id'], stdout=f)
+    return True
+    #if get_machine_id() == load_machine_id():
+    #    return True
 
 def save_new_passwords(pass_dict):
     with open("passwords.txt", 'w', encoding = 'utf-8') as f:
