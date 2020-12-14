@@ -42,7 +42,6 @@ def add_password(pass_dict):
     new_site = str(input())
     print("enter the password")
     new_pass = str(input())
-    master_pass = get_master_password().encode('utf-8')
     hashed_pass = encrypt_password(new_pass)
     pass_dict.update({new_site : hashed_pass.decode('utf-8')})
     return pass_dict
@@ -64,17 +63,15 @@ def get_password(pass_dict):
     site_name = str(input())
     if auth() == True:
         try:
-            master_pass = get_master_password().encode('utf-8')
             password = decrypt_password(pass_dict[site_name].encode('utf-8'))
             return password.decode('utf-8')
         except KeyError:
             print("There is no {} site in your passman!".format(site_name))
     else:
         print("unsuccessful auth")
-        
+
 def get_password_menu(pass_dict):
     print("enter a site name")
-
     options = pass_dict.keys()
     choice = enquiries.choose('Choose one of these options: ', options)
     print("you chose:", choice)
@@ -90,8 +87,9 @@ def get_password_menu(pass_dict):
 def create_master_password():
     if os.stat('.master_pass').st_size==0:
         print("avaiable")
-        master_pass = str(input())
-        with open('.master_pass', 'w') as f:
+        master_pass = encrypt_password(str(input()))
+        print(master_pass)
+        with open('.master_pass', 'wb') as f:
             f.write(master_pass)
             f.close()
     else:
@@ -100,5 +98,8 @@ def create_master_password():
 def get_master_password():
     with open('.master_pass', 'r') as f:
         master_pass = f.read().replace('\n', '')
+        print(master_pass.encode('utf-8'))
         f.close()
-    return master_pass
+    master_pass = decrypt_password(master_pass.encode('utf-8'))
+
+    return master_pass.decode('utf-8')
