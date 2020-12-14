@@ -39,7 +39,7 @@ while True:
         elif settings_choice == settings_options[1]:
             print("creating master password...")
             passman.create_master_password()
-            passman.generate_key()
+            #passman.generate_key()
         elif settings_choice == settings_options[2]:
             print("exiting...")
             quit()
